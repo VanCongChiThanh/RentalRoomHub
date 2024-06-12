@@ -26,6 +26,14 @@ namespace BUS
         {
             return DAL_TongTien.Instance.getTongTien(idTro);
         }
+        public string GetIDbyName(string name)
+        {
+            return DAL_TongTien.Instance.GetIDbyName(name);
+        }
+        public bool CheckTongTien(string id)
+        {
+            return DAL_TongTien.Instance.CheckTongTien(id);
+        }
         public DataTable getTongTienByID(string id)
         {
             return DAL_TongTien.Instance.getTongTienByID(id);
@@ -38,6 +46,7 @@ namespace BUS
         {
             DAL_TongTien.Instance.UpdateTienNo(tienno, id);
         }
+
         public void UpdateThangMoi(int tongtien, int tiendathanhtoan, string id)
         {
             DAL_TongTien.Instance.UpdateThangMoi(tongtien, tiendathanhtoan, id);

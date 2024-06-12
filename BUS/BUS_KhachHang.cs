@@ -32,12 +32,17 @@ namespace BUS
         {
             return DAL_KhachHang.Instance.GetKhachHangByID(id);
         }
-        public DataTable GetThongTinKhachHangByTen(string tenKhachHang)
+        public DataTable GetThongTinKhachHangByTen(string tenKhachHang,string idtro)
         {
-            string query = string.Format("SELECT DISTINCT ID_KhachHang, TenKhachHang, TenTaiKhoan, Password, CCCD, SoDienThoai, DiaChi, MaPhong, TenLoaiPhong, Gia, TrangThai FROM Phong JOIN LoaiPhong ON Phong.ID_LoaiPhong = LoaiPhong.ID_LoaiPhong JOIN KhachHang ON KhachHang.MaPhong = Phong.ID_Phong WHERE LOWER(KhachHang.TenKhachHang) LIKE '%{0}%'", tenKhachHang.ToLower());
-            DataTable dtPhong = new DataTable();
-            dtPhong = DAL_DBHelper.Instance.GetRecords(query);
-            return dtPhong;
+            return DAL_KhachHang.Instance.GetThongTinKhachHangByTen(tenKhachHang, idtro);
+        }
+        public DataTable GetUserNameAndPassWordByMaPhong(string maphong)
+        {
+            return DAL_KhachHang.Instance.GetUserNameAndPassWordByMaPhong(maphong);
+        }
+        public void DeleteByID_Phong(string id)
+        {
+             DAL_KhachHang.Instance.DeleteByID_Phong(id);
         }
         public DataTable GetKhachHangByIdPhong(string Id)
         {

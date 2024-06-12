@@ -11,7 +11,7 @@ namespace DAL
 
     public class DAL_ChuTro
     {
-        private SqlConnection _conn = new SqlConnection("Data Source=LAPTOP-8EBE9VMB\\SQLEXPRESS;Initial Catalog=t2;Integrated Security=True");
+        private SqlConnection _conn = new SqlConnection("Data Source=LAPTOP-8EBE9VMB\\SQLEXPRESS;Initial Catalog=t5;Integrated Security=True");
         private static DAL_ChuTro _instance;
         public static DAL_ChuTro Instance
         {

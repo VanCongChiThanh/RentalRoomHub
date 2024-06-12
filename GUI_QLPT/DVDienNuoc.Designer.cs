@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.btnLuuGia = new System.Windows.Forms.TabPage();
+            this.dataGridViewLoaiTro = new System.Windows.Forms.DataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtNewGiaPhong = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.txtNewLoaiPhong = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
             this.btnLuuGiaDienNuoc = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtGiaNuoc = new System.Windows.Forms.TextBox();
@@ -63,7 +69,6 @@
             this.ThanhTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.cbbTime = new System.Windows.Forms.ComboBox();
             this.lb = new System.Windows.Forms.Label();
             this.txtPhongUpd = new System.Windows.Forms.TextBox();
             this.btnLuu = new System.Windows.Forms.Button();
@@ -84,13 +89,9 @@
             this.labeltt = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtNewGiaPhong = new System.Windows.Forms.TextBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.txtNewLoaiPhong = new System.Windows.Forms.TextBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.dataGridViewLoaiTro = new System.Windows.Forms.DataGridView();
             this.btnLuuGia.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLoaiTro)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnEditNuoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnEditDien)).BeginInit();
@@ -102,8 +103,6 @@
             this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLoaiTro)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLuuGia
@@ -122,12 +121,77 @@
             this.btnLuuGia.TabIndex = 1;
             this.btnLuuGia.Text = "Thiết lập giá dịch vụ";
             // 
+            // dataGridViewLoaiTro
+            // 
+            this.dataGridViewLoaiTro.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewLoaiTro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewLoaiTro.Location = new System.Drawing.Point(607, 229);
+            this.dataGridViewLoaiTro.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewLoaiTro.Name = "dataGridViewLoaiTro";
+            this.dataGridViewLoaiTro.RowHeadersWidth = 82;
+            this.dataGridViewLoaiTro.RowTemplate.Height = 33;
+            this.dataGridViewLoaiTro.Size = new System.Drawing.Size(530, 268);
+            this.dataGridViewLoaiTro.TabIndex = 22;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtNewGiaPhong);
+            this.groupBox2.Controls.Add(this.label40);
+            this.groupBox2.Controls.Add(this.txtNewLoaiPhong);
+            this.groupBox2.Controls.Add(this.label41);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(94)))), ((int)(((byte)(148)))));
+            this.groupBox2.Location = new System.Drawing.Point(607, 27);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(530, 166);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Giá Phòng";
+            // 
+            // txtNewGiaPhong
+            // 
+            this.txtNewGiaPhong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNewGiaPhong.Location = new System.Drawing.Point(197, 110);
+            this.txtNewGiaPhong.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtNewGiaPhong.Name = "txtNewGiaPhong";
+            this.txtNewGiaPhong.Size = new System.Drawing.Size(299, 30);
+            this.txtNewGiaPhong.TabIndex = 11;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(18, 115);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(102, 25);
+            this.label40.TabIndex = 10;
+            this.label40.Text = "Giá phòng";
+            // 
+            // txtNewLoaiPhong
+            // 
+            this.txtNewLoaiPhong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNewLoaiPhong.Location = new System.Drawing.Point(197, 44);
+            this.txtNewLoaiPhong.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtNewLoaiPhong.Name = "txtNewLoaiPhong";
+            this.txtNewLoaiPhong.Size = new System.Drawing.Size(299, 30);
+            this.txtNewLoaiPhong.TabIndex = 9;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(18, 51);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(142, 25);
+            this.label41.TabIndex = 8;
+            this.label41.Text = "Tên loại phòng";
+            // 
             // btnLuuGiaDienNuoc
             // 
             this.btnLuuGiaDienNuoc.BackColor = System.Drawing.Color.SteelBlue;
             this.btnLuuGiaDienNuoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLuuGiaDienNuoc.ForeColor = System.Drawing.Color.White;
-            this.btnLuuGiaDienNuoc.Location = new System.Drawing.Point(492, 554);
+            this.btnLuuGiaDienNuoc.Location = new System.Drawing.Point(498, 554);
             this.btnLuuGiaDienNuoc.Name = "btnLuuGiaDienNuoc";
             this.btnLuuGiaDienNuoc.Size = new System.Drawing.Size(170, 67);
             this.btnLuuGiaDienNuoc.TabIndex = 2;
@@ -332,6 +396,7 @@
             this.dataGridViewSoDienNuoc.Name = "dataGridViewSoDienNuoc";
             this.dataGridViewSoDienNuoc.RowHeadersWidth = 50;
             this.dataGridViewSoDienNuoc.RowTemplate.Height = 24;
+            this.dataGridViewSoDienNuoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewSoDienNuoc.Size = new System.Drawing.Size(1287, 343);
             this.dataGridViewSoDienNuoc.TabIndex = 1;
             // 
@@ -472,7 +537,6 @@
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.dateTimePicker1);
-            this.groupBox5.Controls.Add(this.cbbTime);
             this.groupBox5.Controls.Add(this.lb);
             this.groupBox5.Controls.Add(this.txtPhongUpd);
             this.groupBox5.Controls.Add(this.btnLuu);
@@ -501,33 +565,10 @@
             // 
             this.dateTimePicker1.CustomFormat = "MM/yyyy";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(39, 206);
+            this.dateTimePicker1.Location = new System.Drawing.Point(589, 23);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(154, 26);
             this.dateTimePicker1.TabIndex = 24;
-            // 
-            // cbbTime
-            // 
-            this.cbbTime.FormattingEnabled = true;
-            this.cbbTime.Items.AddRange(new object[] {
-            "T1/2024",
-            "T2/2024",
-            "T3/2024",
-            "T4/2024",
-            "T5/2024",
-            "T6/2024",
-            "T7/2024",
-            "T8/2024",
-            "T9/2024",
-            "T10/2024",
-            "T11/2024",
-            "T12/2024"});
-            this.cbbTime.Location = new System.Drawing.Point(580, 26);
-            this.cbbTime.Margin = new System.Windows.Forms.Padding(2);
-            this.cbbTime.Name = "cbbTime";
-            this.cbbTime.Size = new System.Drawing.Size(176, 28);
-            this.cbbTime.TabIndex = 23;
-            this.cbbTime.SelectedIndexChanged += new System.EventHandler(this.cbbTime_SelectedIndexChanged);
             // 
             // lb
             // 
@@ -734,71 +775,6 @@
             this.tabControl1.Size = new System.Drawing.Size(1332, 711);
             this.tabControl1.TabIndex = 0;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txtNewGiaPhong);
-            this.groupBox2.Controls.Add(this.label40);
-            this.groupBox2.Controls.Add(this.txtNewLoaiPhong);
-            this.groupBox2.Controls.Add(this.label41);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(94)))), ((int)(((byte)(148)))));
-            this.groupBox2.Location = new System.Drawing.Point(607, 27);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(530, 166);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Giá Phòng";
-            // 
-            // txtNewGiaPhong
-            // 
-            this.txtNewGiaPhong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNewGiaPhong.Location = new System.Drawing.Point(197, 110);
-            this.txtNewGiaPhong.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtNewGiaPhong.Name = "txtNewGiaPhong";
-            this.txtNewGiaPhong.Size = new System.Drawing.Size(299, 30);
-            this.txtNewGiaPhong.TabIndex = 11;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.Location = new System.Drawing.Point(18, 115);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(102, 25);
-            this.label40.TabIndex = 10;
-            this.label40.Text = "Giá phòng";
-            // 
-            // txtNewLoaiPhong
-            // 
-            this.txtNewLoaiPhong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNewLoaiPhong.Location = new System.Drawing.Point(197, 44);
-            this.txtNewLoaiPhong.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtNewLoaiPhong.Name = "txtNewLoaiPhong";
-            this.txtNewLoaiPhong.Size = new System.Drawing.Size(299, 30);
-            this.txtNewLoaiPhong.TabIndex = 9;
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(18, 51);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(142, 25);
-            this.label41.TabIndex = 8;
-            this.label41.Text = "Tên loại phòng";
-            // 
-            // dataGridViewLoaiTro
-            // 
-            this.dataGridViewLoaiTro.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewLoaiTro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewLoaiTro.Location = new System.Drawing.Point(607, 229);
-            this.dataGridViewLoaiTro.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridViewLoaiTro.Name = "dataGridViewLoaiTro";
-            this.dataGridViewLoaiTro.RowHeadersWidth = 82;
-            this.dataGridViewLoaiTro.RowTemplate.Height = 33;
-            this.dataGridViewLoaiTro.Size = new System.Drawing.Size(530, 268);
-            this.dataGridViewLoaiTro.TabIndex = 22;
-            // 
             // DVDienNuoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -808,6 +784,9 @@
             this.Name = "DVDienNuoc";
             this.Text = "DVDienNuoc";
             this.btnLuuGia.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLoaiTro)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnEditNuoc)).EndInit();
@@ -823,9 +802,6 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLoaiTro)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -884,7 +860,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DonGiaDien;
         private System.Windows.Forms.DataGridViewTextBoxColumn DonGiaNuoc;
         private System.Windows.Forms.DataGridViewTextBoxColumn ThanhTien;
-        private System.Windows.Forms.ComboBox cbbTime;
         private System.Windows.Forms.Label lb;
         private System.Windows.Forms.Button btnLuuGiaDienNuoc;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;

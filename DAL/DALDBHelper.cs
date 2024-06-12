@@ -20,7 +20,7 @@ namespace DAL
             {
                 if (_Instance == null)
                 {
-                    String s = @"Data Source=DESKTOP-KKVDHC9\SQLEXPRESS;Initial Catalog=t4;Integrated Security=True;";
+                    String s = @"Data Source=DESKTOP-KKVDHC9\SQLEXPRESS;Initial Catalog=t5;Integrated Security=True;";
                     _Instance = new DAL_DBHelper(s);
                 }
                 return _Instance;

@@ -117,7 +117,7 @@ namespace DAL
         public bool CheckConflict(string username)
         {
             // Thay đổi connection string theo cấu hình của bạn
-            string connectionString = "Data Source=DESKTOP-KKVDHC9\\SQLEXPRESS;Initial Catalog=t4;Integrated Security=True;";
+            string connectionString = "Data Source=DESKTOP-KKVDHC9\\SQLEXPRESS;Initial Catalog=t5;Integrated Security=True;";
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();

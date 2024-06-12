@@ -12,7 +12,7 @@ namespace DAO
 {
     public class DAL_LoaiPhong
     {
-        private SqlConnection _conn = new SqlConnection("Data Source=DESKTOP-KKVDHC9\\SQLEXPRESS;Initial Catalog=t4;Integrated Security=True;");
+        private SqlConnection _conn = new SqlConnection("Data Source=DESKTOP-KKVDHC9\\SQLEXPRESS;Initial Catalog=t5;Integrated Security=True;");
         private static DAL_LoaiPhong _instance;
         public static DAL_LoaiPhong Instance
         {

@@ -21,6 +21,7 @@ namespace GUI_QLPT
             InitializeComponent();
             SetUI();
             this.dataGridViewLoaiTro.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewLoaiTro_CellClick);
+            comboBox1.SelectedIndex = 1;
         }
         public void SetUI()
         {
@@ -82,8 +83,8 @@ namespace GUI_QLPT
                     dataGridViewSoDienNuoc.Rows[i].Cells["SoDienSuDung"].Value = '0';
                     dataGridViewSoDienNuoc.Rows[i].Cells["SoNuocSuDung"].Value = '0';
 
-                    dataGridViewSoDienNuoc.Rows[i].Cells["DonGiaDien"].Value = "5000";
-                    dataGridViewSoDienNuoc.Rows[i].Cells["DonGiaNuoc"].Value = "6000";
+                    dataGridViewSoDienNuoc.Rows[i].Cells["DonGiaDien"].Value = dt.Rows[i]["DonGiaDien"].ToString();
+                    dataGridViewSoDienNuoc.Rows[i].Cells["DonGiaNuoc"].Value = dt.Rows[i]["DonGiaNuoc"].ToString();
 
                     dataGridViewSoDienNuoc.Rows[i].Cells["SoTienThanhToan1"].Value = '0';
                 }
@@ -104,9 +105,8 @@ namespace GUI_QLPT
 
                     dataGridViewSoDienNuoc.Rows[i].Cells["SoDienSuDung"].Value = '0';
                     dataGridViewSoDienNuoc.Rows[i].Cells["SoNuocSuDung"].Value = '0';
-
-                    dataGridViewSoDienNuoc.Rows[i].Cells["DonGiaDien"].Value = "5000";
-                    dataGridViewSoDienNuoc.Rows[i].Cells["DonGiaNuoc"].Value = "6000";
+                    dataGridViewSoDienNuoc.Rows[i].Cells["DonGiaDien"].Value = dt.Rows[i]["DonGiaDien"].ToString();
+                    dataGridViewSoDienNuoc.Rows[i].Cells["DonGiaNuoc"].Value = dt.Rows[i]["DonGiaNuoc"].ToString();
 
                     dataGridViewSoDienNuoc.Rows[i].Cells["SoTienThanhToan1"].Value = '0';
                 }
@@ -185,63 +185,57 @@ namespace GUI_QLPT
             {
                 if (dataGridViewSoDienNuoc.SelectedRows[0].Cells["TrangThai"].Value.ToString().Equals("Đang thuê"))
                 {
-                    int sodiensudung = Convert.ToInt32(txtChiSoDienMoi.Text)
-                         - Convert.ToInt32(dataGridViewSoDienNuoc.SelectedRows[0].Cells["SoDienCu"].Value.ToString());
+                    int chiSoDienMoi, chiSoNuocMoi;
+                    bool isDienValid = int.TryParse(txtChiSoDienMoi.Text, out chiSoDienMoi);
+                    bool isNuocValid = int.TryParse(txtChiSoNuocMoi.Text, out chiSoNuocMoi);
+
+                    int soDienCu = Convert.ToInt32(dataGridViewSoDienNuoc.SelectedRows[0].Cells["SoDienCu"].Value);
+                    int soNuocCu = Convert.ToInt32(dataGridViewSoDienNuoc.SelectedRows[0].Cells["SoNuocCu"].Value);
+                    int sodiensudung = chiSoDienMoi - soDienCu;
+                    int sonuocsudung = chiSoNuocMoi - soNuocCu;
+
+                    if (!isDienValid || !isNuocValid || sodiensudung < 0 || sonuocsudung < 0)
+                    {
+                        MessageBox.Show("Số điện hoặc số nước không hợp lệ. Vui lòng nhập lại.");
+                        return;
+                    }
 
                     dataGridViewSoDienNuoc.SelectedRows[0].Cells["SoDienSuDung"].Value = sodiensudung.ToString();
-
-                    int sonuocsudung = Convert.ToInt32(txtChiSoNuocMoi.Text)
-               - Convert.ToInt32(dataGridViewSoDienNuoc.SelectedRows[0].Cells["SoNuocCu"].Value.ToString());
-
                     dataGridViewSoDienNuoc.SelectedRows[0].Cells["SoNuocSuDung"].Value = sonuocsudung.ToString();
-                    MessageBox.Show("0");
-                    if (sonuocsudung < 0 || sodiensudung < 0)
+                    dataGridViewSoDienNuoc.SelectedRows[0].Cells["SoDienMoi"].Value = chiSoDienMoi.ToString();
+                    dataGridViewSoDienNuoc.SelectedRows[0].Cells["SoNuocMoi"].Value = chiSoNuocMoi.ToString();
+
+                    int dien = Convert.ToInt32(dataGridViewSoDienNuoc.SelectedRows[0].Cells["DonGiaDien"].Value);
+                    int nuoc = Convert.ToInt32(dataGridViewSoDienNuoc.SelectedRows[0].Cells["DonGiaNuoc"].Value);
+                    int thanhtien = dien * sodiensudung + nuoc * sonuocsudung;
+                    int giaphong = Convert.ToInt32(dataGridViewSoDienNuoc.SelectedRows[0].Cells["TienPhong"].Value);
+                    dataGridViewSoDienNuoc.SelectedRows[0].Cells["ThanhTien"].Value = (giaphong + thanhtien).ToString();
+
+                    // Cập nhật thông tin vào cơ sở dữ liệu
+                    BUS_DienNuoc.Instance.UpdateDienNuoc(chiSoDienMoi, chiSoNuocMoi, dataGridViewSoDienNuoc.SelectedRows[0].Cells["ID_Phong1"].Value.ToString());
+
+                    // Xử lý thống kê và tài chính
+                    DataTable dt = BUS_Phong.Instance.GetPhongByID(txtPhongUpd.Text);
+                    int gia = 0;
+                    foreach (DataRow dr in dt.Rows)
+                        gia = Convert.ToInt32(dr["Gia"].ToString());
+                    int tt = gia + thanhtien;
+                    DateTime selectedDate = dateTimePicker1.Value;
+                    string formattedDate = "T" + selectedDate.ToString("M/yyyy");
+                    BUS_ThongKe.Instance.InsertDienNuoc(formattedDate, sodiensudung, sonuocsudung, gia, tt, dataGridViewSoDienNuoc.SelectedRows[0].Cells["ID_Phong1"].Value.ToString());
+
+                    // Cập nhật thông tin tài chính
+                    dt = BUS_TongTien.Instance.getTongTienByID(txtPhongUpd.Text);
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        MessageBox.Show("Số điện hoặc nước không hợp lệ");
-                    }
-                    else
-                    {
-                        MessageBox.Show("1");
-
-
-                        dataGridViewSoDienNuoc.SelectedRows[0].Cells["SoDienMoi"].Value = txtChiSoDienMoi.Text;
-                        dataGridViewSoDienNuoc.SelectedRows[0].Cells["SoNuocMoi"].Value = txtChiSoNuocMoi.Text;
-                        int dien = Convert.ToInt32(dataGridViewSoDienNuoc.SelectedRows[0].Cells["DonGiaDien"].Value.ToString());
-                        int nuoc = Convert.ToInt32(dataGridViewSoDienNuoc.SelectedRows[0].Cells["DonGiaNuoc"].Value.ToString());
-                        int thanhtien = dien * sodiensudung + nuoc * sonuocsudung;
-                        int giaphong = Convert.ToInt32(dataGridViewSoDienNuoc.SelectedRows[0].Cells["TienPhong"].Value.ToString());
-                        dataGridViewSoDienNuoc.SelectedRows[0].Cells["ThanhTien"].Value = (giaphong + thanhtien).ToString();
-                        MessageBox.Show("2");
-
-                        BUS_DienNuoc.Instance.UpdateDienNuoc(Convert.ToInt32(txtChiSoDienMoi.Text), Convert.ToInt32(txtChiSoNuocMoi.Text), dataGridViewSoDienNuoc.SelectedRows[0].Cells["ID_Phong1"].Value.ToString());
-
-                        DataTable dt = BUS_Phong.Instance.GetPhongByID(txtPhongUpd.Text);
-                        int gia = 0;
-
-                        foreach (DataRow dr in dt.Rows)
-                            gia = Convert.ToInt32(dr["Gia"].ToString());
-                        int tt = 0;
-                        tt = gia + thanhtien;
-                        //cbbTime.SelectedItem.ToString()
-                        DateTime selectedDate = dateTimePicker1.Value;
-                        // Chuyển đổi sang định dạng mong muốn, thêm 'T' trước tháng
-                        string formattedDate = "T" + selectedDate.ToString("M/yyyy");
-                        BUS_ThongKe.Instance.InsertDienNuoc(formattedDate, sodiensudung, sonuocsudung, gia, tt, dataGridViewSoDienNuoc.SelectedRows[0].Cells["ID_Phong1"].Value.ToString());
-                        dt = BUS_TongTien.Instance.getTongTienByID(txtPhongUpd.Text);
-
-                        foreach (DataRow dr in dt.Rows)
+                        int totalDue = Convert.ToInt32(dr["DuNo"].ToString()) + Convert.ToInt32(dr["TongTien"].ToString()) - Convert.ToInt32(dr["TienDaThanhToan"].ToString());
+                        if (totalDue != 0)
                         {
-                            //2110000
-                            if (Convert.ToInt32(dr["TongTien"].ToString()) - Convert.ToInt32(dr["TienDaThanhToan"].ToString()) != 0)
-                            {
-                                BUS_TongTien.Instance.UpdateTienNo(Convert.ToInt32(dr["DuNo"].ToString()) + Convert.ToInt32(dr["TongTien"].ToString()) - Convert.ToInt32(dr["TienDaThanhToan"].ToString()), txtPhongUpd.Text);
-                            }
-                            MessageBox.Show("5");
-
+                            BUS_TongTien.Instance.UpdateTienNo(totalDue, txtPhongUpd.Text);
                         }
-                        BUS_TongTien.Instance.UpdateThangMoi(tt, 0, txtPhongUpd.Text);
                     }
-
+                    BUS_TongTien.Instance.UpdateThangMoi(tt, 0, txtPhongUpd.Text);
+                    MessageBox.Show("Thông tin đã được cập nhật thành công.");
                 }
                 else
                 {
@@ -250,9 +244,10 @@ namespace GUI_QLPT
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn phòng xủ lý!!!");
+                MessageBox.Show("Vui lòng chọn phòng để xử lý!");
             }
         }
+
 
         private void cbTrangThai_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -295,27 +290,52 @@ namespace GUI_QLPT
             string idTro = selectedKeyValuePair.Key.ToString();
             string diaChi = selectedKeyValuePair.Value;
             BUS_Tro.Instance.ThayDoiThongTin(diaChi, txtGiaDien.Text, txtGiaNuoc.Text, idTro);
+
             if (IDTRO.Equals("0"))
             {
                 MessageBox.Show("Vui lòng chọn trọ cần thêm thông tin");
+                return;  // Ngừng xử lý nếu không chọn trọ
             }
-            else
+
+            string loaiphong = txtNewLoaiPhong.Text;
+            string gia = txtNewGiaPhong.Text;
+
+            decimal giaValue;  // Biến để kiểm tra giá trị decimal
+            if (!decimal.TryParse(gia, out giaValue))
             {
-                string loaiphong = txtNewLoaiPhong.Text;
-                string gia = txtNewGiaPhong.Text;
-                if (dataGridViewLoaiTro.SelectedRows.Count > 0)
+                MessageBox.Show("Giá phòng phải là một số. Vui lòng nhập lại.");
+                return;  // Ngừng xử lý nếu giá không phải là số
+            }
+
+            if (dataGridViewLoaiTro.SelectedRows.Count > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Bạn có muốn cập nhật thông tin phòng đã chọn không? Chọn 'No' để thêm mới.", "Xác nhận hành động", MessageBoxButtons.YesNoCancel);
+                if (dialogResult == DialogResult.Yes)
                 {
+                    // Cập nhật thông tin
                     BUS_LoaiPhong.Instance.Update(loaiphong, gia, dataGridViewLoaiTro.SelectedRows[0].Cells["ID_LoaiPhong"].Value.ToString());
                     MessageBox.Show("Cập nhật thông tin thành công");
                 }
-                else
+                else if (dialogResult == DialogResult.No)
                 {
-                    BUS_LoaiPhong.Instance.ThemLoaiPhong(loaiphong, gia, IDTRO);
+                    // Thêm mới thông tin
+                    BUS_LoaiPhong.Instance.ThemLoaiPhong(loaiphong, gia, idTro);
                     MessageBox.Show("Thêm thành công");
                 }
-
             }
+            else
+            {
+                // Thêm mới thông tin
+                BUS_LoaiPhong.Instance.ThemLoaiPhong(loaiphong, gia, idTro);
+                MessageBox.Show("Thêm thành công");
+            }
+
+            // Cập nhật lại DataGridView
+            dataGridViewLoaiTro.DataSource = BUS_LoaiPhong.Instance.GetLoaiPhongByIDTRO(idTro);
+            dataGridViewLoaiTro.DataBindingComplete += dataGridViewLoaiTro_DataBindingComplete;
         }
+
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -333,7 +353,7 @@ namespace GUI_QLPT
                 txtGiaDien.Text = donGiaDien.ToString();
                 txtGiaNuoc.Text = donGiaNuoc.ToString();
             }
-            dataGridViewLoaiTro.DataSource = BUS_LoaiPhong.Instance.GetLoaiPhongByIDTRO(IDTRO.ToString());
+            dataGridViewLoaiTro.DataSource = BUS_LoaiPhong.Instance.GetLoaiPhongByIDTRO(idTro);
             dataGridViewLoaiTro.DataBindingComplete += dataGridViewLoaiTro_DataBindingComplete;
         }
 

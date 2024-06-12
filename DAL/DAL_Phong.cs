@@ -15,7 +15,7 @@ namespace DAL
 {
     public class DAL_Phong
     {
-        private SqlConnection _conn = new SqlConnection(@"Data Source=DESKTOP-KKVDHC9\SQLEXPRESS;Initial Catalog=t4;Integrated Security=True;");
+        private SqlConnection _conn = new SqlConnection(@"Data Source=DESKTOP-KKVDHC9\SQLEXPRESS;Initial Catalog=t5;Integrated Security=True;");
         private static DAL_Phong _instance;
         public static DAL_Phong Instance
         {

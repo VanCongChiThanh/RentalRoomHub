@@ -32,22 +32,23 @@ namespace GUI_QLPT
                 if (financialData.Tables["LatestMonth"].Rows.Count > 0)
                 {
                     DataRow latest = financialData.Tables["LatestMonth"].Rows[0];
-                    double doanhThuThang = (latest["DoanhThu"] != DBNull.Value) ? Convert.ToDouble(latest["DoanhThu"]) / 1000000 : 0; // Chia để loại bỏ ba số 0
-                    double loiNhuanThang = (latest["LoiNhuận"] != DBNull.Value) ? Convert.ToDouble(latest["LoiNhuận"]) / 1000000 : 0; // Chia để loại bỏ ba số 0
-                    lbDoanhThuThang.Text = doanhThuThang.ToString("N0"); // "N0" để định dạng không có số thập phân
+                    double doanhThuThang = (latest["DoanhThu"] != DBNull.Value) ? Convert.ToDouble(latest["DoanhThu"]) / 1000 : 0;
+                    double loiNhuanThang = (latest["LoiNhuận"] != DBNull.Value) ? Convert.ToDouble(latest["LoiNhuận"]) / 1000 : 0;
+                    lbDoanhThuThang.Text = doanhThuThang.ToString("N0"); // "N0" để định dạng số có dấu phẩy hàng nghìn
                     lbLoiNhuanThang.Text = loiNhuanThang.ToString("N0");
                 }
 
                 if (financialData.Tables["TotalSummary"].Rows.Count > 0)
                 {
                     DataRow total = financialData.Tables["TotalSummary"].Rows[0];
-                    double tongDoanhThu = (total["TongDoanhThu"] != DBNull.Value) ? Convert.ToDouble(total["TongDoanhThu"]) / 1000000 : 0; // Chia để loại bỏ ba số 0
-                    double tongLoiNhuan = (total["TongLoiNhuận"] != DBNull.Value) ? Convert.ToDouble(total["TongLoiNhuận"]) / 1000000 : 0; // Chia để loại bỏ ba số 0
+                    double tongDoanhThu = (total["TongDoanhThu"] != DBNull.Value) ? Convert.ToDouble(total["TongDoanhThu"]) / 1000 : 0;
+                    double tongLoiNhuan = (total["TongLoiNhuận"] != DBNull.Value) ? Convert.ToDouble(total["TongLoiNhuận"]) / 1000 : 0;
                     lbTongDoanhThu.Text = tongDoanhThu.ToString("N0");
                     lbTongLoiNhuan.Text = tongLoiNhuan.ToString("N0");
                 }
             }
         }
+
 
 
 

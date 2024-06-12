@@ -40,7 +40,7 @@ namespace GUI_QLPT
             string searchKeyWord = txtTimKiemKH.Text;
             if (!string.IsNullOrEmpty(searchKeyWord))
             {
-                dataGridViewKhachHang.DataSource = BUS_KhachHang.Instance.GetThongTinKhachHangByTen(searchKeyWord);
+                dataGridViewKhachHang.DataSource = BUS_KhachHang.Instance.GetThongTinKhachHangByTen(searchKeyWord,IDTRO);
             }
             else
             {
@@ -138,18 +138,24 @@ namespace GUI_QLPT
             string tk = dataGridViewKhachHang.SelectedRows[0].Cells["Tài khoản"].Value.ToString();
             string pass = dataGridViewKhachHang.SelectedRows[0].Cells["Mật khẩu"].Value.ToString();
             string maphong = dataGridViewKhachHang.SelectedRows[0].Cells["Phòng"].Value.ToString();
-
-            if (MessageBox.Show("Bạn có chắc chắn xóa khách hàng " + dataGridViewKhachHang.SelectedRows[0].Cells["Tên khách hàng"].Value.ToString() + " không?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            if (BUS_KhachHang.Instance.GetUserNameAndPassWordByMaPhong(maphong).Rows.Count == 1)
             {
-                MessageBox.Show("Xóa khách hàng thành công!");
-                BUS_KhachHang.Instance.Delete(id);
-                BUS_TaiKhoan.Instance.DeleteByUserNameAndPassword(tk, pass);
-                DataTable dt = BUS_KhachHang.Instance.GetKhachHangByIdPhong(maphong);
-                if (dt.Rows.Count < 1)
+                MessageBox.Show("Phòng này hiện chỉ có 1 người, để trả trọ vui lòng qua chức năng trả trọ");
+            }
+            else
+            {
+                if (MessageBox.Show("Bạn có chắc chắn xóa khách hàng " + dataGridViewKhachHang.SelectedRows[0].Cells["Tên khách hàng"].Value.ToString() + " không?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    BUS_Phong.Instance.UpdateTrangThai(maphong, 0);
+                    MessageBox.Show("Xóa khách hàng thành công!");
+                    BUS_KhachHang.Instance.Delete(id);
+                    BUS_TaiKhoan.Instance.DeleteByUserNameAndPassword(tk, pass);
+                    DataTable dt = BUS_KhachHang.Instance.GetKhachHangByIdPhong(maphong);
+                    if (dt.Rows.Count < 1)
+                    {
+                        BUS_Phong.Instance.UpdateTrangThai(maphong, 0);
+                    }
+                    dataGridViewKhachHang.DataSource = BUS_Phong.Instance.GetThongTinKhachHang(IDTRO);
                 }
-                dataGridViewKhachHang.DataSource = BUS_Phong.Instance.GetThongTinKhachHang(IDTRO);
             }
         }
 

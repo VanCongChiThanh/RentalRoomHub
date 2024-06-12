@@ -88,9 +88,9 @@
             // 
             // btnThemPhongTro
             // 
-            this.btnThemPhongTro.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnThemPhongTro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnThemPhongTro.Image = global::GUI_QLPT.Properties.Resources.plus;
-            this.btnThemPhongTro.Location = new System.Drawing.Point(1183, 218);
+            this.btnThemPhongTro.Location = new System.Drawing.Point(1183, 249);
             this.btnThemPhongTro.Name = "btnThemPhongTro";
             this.btnThemPhongTro.Size = new System.Drawing.Size(80, 61);
             this.btnThemPhongTro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

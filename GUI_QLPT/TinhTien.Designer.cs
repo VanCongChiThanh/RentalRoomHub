@@ -42,7 +42,7 @@
             this.TongSoTienDaThanhToan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TongSoTienChuaThanhToan = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnTraPhong = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.cbbTinhTrangPhong = new System.Windows.Forms.ComboBox();
@@ -198,7 +198,7 @@
             // 
             // groupBox6
             // 
-            this.groupBox6.Controls.Add(this.button2);
+            this.groupBox6.Controls.Add(this.btnTraPhong);
             this.groupBox6.Controls.Add(this.label21);
             this.groupBox6.Controls.Add(this.label20);
             this.groupBox6.Controls.Add(this.cbbTinhTrangPhong);
@@ -214,16 +214,16 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Tìm kiếm";
             // 
-            // button2
+            // btnTraPhong
             // 
-            this.button2.Location = new System.Drawing.Point(251, 128);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(123, 38);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Trả phòng";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnTraPhong.Location = new System.Drawing.Point(251, 128);
+            this.btnTraPhong.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnTraPhong.Name = "btnTraPhong";
+            this.btnTraPhong.Size = new System.Drawing.Size(123, 38);
+            this.btnTraPhong.TabIndex = 2;
+            this.btnTraPhong.Text = "Trả phòng";
+            this.btnTraPhong.UseVisualStyleBackColor = true;
+            this.btnTraPhong.Click += new System.EventHandler(this.btnTraPhong_Click);
             // 
             // label21
             // 
@@ -382,7 +382,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridViewTinhTien;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnTraPhong;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cbbTinhTrangPhong;

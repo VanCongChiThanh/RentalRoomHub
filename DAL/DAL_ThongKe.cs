@@ -87,7 +87,7 @@ ORDER BY
             ID_Phong IN (SELECT ID_Phong FROM Phong WHERE ID_Tro = @IDTro)
     ";
 
-            using (SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-KKVDHC9\SQLEXPRESS;Initial Catalog=t4;Integrated Security=True;"))
+            using (SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-KKVDHC9\SQLEXPRESS;Initial Catalog=t5;Integrated Security=True;"))
             {
                 SqlCommand cmdLatest = new SqlCommand(queryLatestMonth, conn);
                 SqlCommand cmdTotal = new SqlCommand(queryTotal, conn);

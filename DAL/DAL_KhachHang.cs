@@ -160,12 +160,25 @@ namespace DAL
             catch { return false; }
                        
         }
-        public DataTable GetThongTinKhachHangByTen(string tenKhachHang)
+        public DataTable GetThongTinKhachHangByTen(string tenKhachHang, string idTro)
         {
-            string query = string.Format("SELECT DISTINCT ID_KhachHang, TenKhachHang, TenTaiKhoan, Password, CCCD, SoDienThoai, DiaChi, MaPhong, TenLoaiPhong, Gia, TrangThai FROM Phong JOIN LoaiPhong ON Phong.ID_LoaiPhong = LoaiPhong.ID_LoaiPhong JOIN KhachHang ON KhachHang.MaPhong = Phong.ID_Phong WHERE LOWER(KhachHang.TenKhachHang) LIKE '%{0}%'", tenKhachHang.ToLower());
+            string query = string.Format("SELECT DISTINCT ID_KhachHang, TenKhachHang, TenTaiKhoan, Password, CCCD, SoDienThoai, DiaChi, MaPhong, TenLoaiPhong, Gia, TrangThai from Phong join LoaiPhong on Phong.ID_LoaiPhong = LoaiPhong.ID_LoaiPhong join KhachHang on KhachHang.MaPhong = Phong.ID_Phong where LOWER(KhachHang.TenKhachHang) LIKE '%{0}%' and Phong.ID_Tro='{1}'", tenKhachHang.ToLower(), idTro);
             DataTable dtPhong = new DataTable();
             dtPhong = DAL_DBHelper.Instance.GetRecords(query);
             return dtPhong;
+        }
+        public void DeleteByID_Phong(string id)
+        {
+            string query = string.Format("Delete from KhachHang where MaPhong = '{0}'", id);
+            DataTable dtKhachHang = new DataTable();
+            DAL_DBHelper.Instance.ExecuteDB(query);
+        }
+        public DataTable GetUserNameAndPassWordByMaPhong(string maphong)
+        {
+            string query = string.Format("SELECT TenTaiKhoan,Password FROM KhachHang WHERE MaPhong = '{0}'", maphong);
+            DataTable dtKhachHang = new DataTable();
+            dtKhachHang = DAL_DBHelper.Instance.GetRecords(query);
+            return dtKhachHang;
         }
 
         public bool UpdateThongTin(string ten, string cccd, string sdt, string diachi, int idkhach)

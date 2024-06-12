@@ -21,6 +21,38 @@ namespace DAL
             private set { _instance = value; }
         }
         public DAL_TongTien() { }
+        public string GetIDbyName(string name)
+        {
+            string id = "";
+            string query = string.Format("select ID_Phong from Phong where TenPhong='{0}'", name);
+            DataTable dt = DAL_DBHelper.Instance.GetRecords(query);
+            foreach (DataRow dr in dt.Rows)
+            {
+                id = dr["ID_Phong"].ToString();
+            }
+            return id;
+        }
+        public bool CheckTongTien(string id)
+        {
+            string query = string.Format("select * from TongTien where ID_Phong='{0}'", id);
+            DataTable dt = DAL_DBHelper.Instance.GetRecords(query);
+            foreach (DataRow dr in dt.Rows)
+            {
+                int tt = Convert.ToInt32(dr["TongTien"].ToString());
+                int dathanhtoan = Convert.ToInt32(dr["TienDaThanhToan"].ToString());
+                if (Convert.ToInt32(dr["DuNo"].ToString()) > 0)
+                {
+                    return false;
+                    break;
+                }
+                if (tt - dathanhtoan > 0)
+                {
+                    return false;
+                    break;
+                }
+            }
+            return true;
+        }
         public DataTable getTongTien(string idTro)
         {
             string query = string.Format("select TenPhong,Phong.ID_Phong,TrangThai,TongTien, TienDaThanhToan,DuNo from TongTien join Phong on Phong.ID_Phong=TongTien.ID_Phong where Phong.ID_Tro='{0}'",idTro);

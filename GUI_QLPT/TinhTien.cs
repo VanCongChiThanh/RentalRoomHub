@@ -92,10 +92,6 @@ namespace GUI_QLPT
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
@@ -144,6 +140,47 @@ namespace GUI_QLPT
                 InitTabThanhToanTraPhong(BUS_TongTien.Instance.getTongTienByTinhTrang(0, IDTRO));
             if (cbbTinhTrangPhong.SelectedValue.ToString().Equals("1"))
                 InitTabThanhToanTraPhong(BUS_TongTien.Instance.getTongTienByTinhTrang(1, IDTRO));
+        }
+
+        private void btnTraPhong_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewTinhTien.SelectedRows.Count > 0)
+            {
+                if (dataGridViewTinhTien.SelectedRows[0].Cells["TrangThai2"].Value.ToString().Equals("Đang thuê"))
+                {
+                    string id = dataGridViewTinhTien.SelectedRows[0].Cells["ID_Phong2"].Value.ToString();
+                    if (MessageBox.Show("Bạn chắc chắn trả phòng " + id + " không?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                    {
+                        string idphong = BUS_TongTien.Instance.GetIDbyName(id);
+                        if (!BUS_TongTien.Instance.CheckTongTien(idphong))
+                        {
+                            MessageBox.Show("Phòng này còn dư nợ");
+                        }
+                        else
+                        {
+                            BUS_TongTien.Instance.UpdateThangMoi(0, 0, idphong);
+                            DataTable dt = BUS_KhachHang.Instance.GetUserNameAndPassWordByMaPhong(idphong);
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                BUS_TaiKhoan.Instance.DeleteByUserNameAndPassword(dr["TenTaiKhoan"].ToString(), dr["Password"].ToString());
+                            }
+                            BUS_KhachHang.Instance.DeleteByID_Phong(idphong);
+                            BUS_Phong.Instance.UpdateTrangThai(idphong, 0);
+                            this.InitTabThanhToanTraPhong(BUS_TongTien.Instance.getTongTien(IDTRO));
+                            MessageBox.Show("Trả phòng thành công");
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Phòng hiện đang không cho thuê");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn phòng cần xử lý!!!");
+            }
         }
     }
 }

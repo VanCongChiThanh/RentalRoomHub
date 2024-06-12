@@ -261,7 +261,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(28, 45);
+            this.label32.Location = new System.Drawing.Point(15, 45);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(142, 20);
             this.label32.TabIndex = 41;
@@ -333,7 +333,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(29, 226);
+            this.label6.Location = new System.Drawing.Point(16, 226);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(69, 20);
             this.label6.TabIndex = 4;
@@ -342,7 +342,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 161);
+            this.label5.Location = new System.Drawing.Point(15, 161);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(120, 20);
             this.label5.TabIndex = 3;
@@ -351,7 +351,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 100);
+            this.label4.Location = new System.Drawing.Point(15, 100);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 20);
             this.label4.TabIndex = 2;
@@ -359,10 +359,10 @@
             // 
             // txtTenKhachHang
             // 
-            this.txtTenKhachHang.Location = new System.Drawing.Point(176, 45);
+            this.txtTenKhachHang.Location = new System.Drawing.Point(178, 45);
             this.txtTenKhachHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtTenKhachHang.Name = "txtTenKhachHang";
-            this.txtTenKhachHang.Size = new System.Drawing.Size(232, 26);
+            this.txtTenKhachHang.Size = new System.Drawing.Size(230, 26);
             this.txtTenKhachHang.TabIndex = 1;
             // 
             // txtTimKiemKH

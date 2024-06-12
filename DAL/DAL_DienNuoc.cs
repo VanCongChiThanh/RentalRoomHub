@@ -92,7 +92,7 @@ namespace DAL
         }
         public DataTable GetDienNuocAll(string idTro)
         {
-            string query = string.Format("select Phong.ID_Phong,SoNuocHienTai,SoDienHienTai,DonGiaDien,DonGiaNuoc,TrangThai,Gia,TenPhong from Phong full join DienNuoc on DienNuoc.ID_Phong=Phong.ID_Phong join LoaiPhong on LoaiPhong.ID_LoaiPhong = Phong.ID_LoaiPhong\r\n where Phong.ID_Tro='{0}'",idTro);
+            string query = string.Format("select Phong.ID_Phong,SoNuocHienTai,SoDienHienTai,Tro.DonGiaDien,Tro.DonGiaNuoc,TrangThai,Gia,TenPhong from Phong full join DienNuoc on DienNuoc.ID_Phong=Phong.ID_Phong join LoaiPhong on LoaiPhong.ID_LoaiPhong = Phong.ID_LoaiPhong join Tro on Phong.ID_Tro = Tro.ID_Tro \r\n where Phong.ID_Tro='{0}'", idTro);
             DataTable dn = new DataTable();
             dn = DAL_DBHelper.Instance.GetRecords(query);
             return dn;
